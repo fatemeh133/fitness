@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  width: 700px;
+  height: 200px;
+  border: 1px solid black;
+  justify-content: center;
+}
+.child {
+  width: 200px;
+  height: 200px;
+}
+#child1 {
+  background-color: antiquewhite;
+}
+#child2 {
+  background-color: rgb(255, 169, 56);
+}
+#child3 {
+  background-color: rgb(175, 99, 0);
+}

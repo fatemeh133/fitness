@@ -11,10 +11,16 @@ import { MaterialModule } from './material.module';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './auth/home/home.component';
-import { TrainingComponent } from './auth/training/training.component';
+import { TrainingComponent } from './training/training.component';
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, LoginComponent, HomeComponent, TrainingComponent],
+  declarations: [
+    AppComponent,
+    SignupComponent,
+    LoginComponent,
+    HomeComponent,
+    TrainingComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],
