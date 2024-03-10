@@ -1,1 +1,35 @@
-<p>login works!</p>
+<section>
+  <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm">
+    <mat-form-field>
+      <mat-label>ایمیل</mat-label>
+      <input matInput ngModel name="email" email required #email="ngModel" />
+      <mat-error *ngIf="!email.hasError('required')">ایمیل نامعتبر</mat-error>
+      <mat-error *ngIf="email.hasError('required')"
+        >ایمیل نباید خالی باشد</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>پسورد</mat-label>
+      <input
+        matInput
+        ngModel
+        type="password"
+        name="password"
+        required
+        minlength="6"
+        #password="ngModel"
+      />
+      <mat-hint align="end">6 / {{ password.value.length }}</mat-hint>
+      <mat-hint>حداقل کاراکتر مجاز ۶ کاراکتر</mat-hint>
+    </mat-form-field>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="f.invalid"
+    >
+      ورود
+    </button>
+  </form>
+</section>
