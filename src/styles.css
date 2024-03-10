@@ -5,14 +5,31 @@ body {
   height: 100%;
 }
 
-.vazirmatn {
+.vazirmatn-light {
   font-family: "Vazirmatn", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
+  font-style: light;
+}
+.vazirmatn-norm {
+  font-family: "Vazirmatn", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
   font-style: normal;
 }
+
+.vazirmatn-bold {
+  font-family: "Vazirmatn", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: bold;
+}
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100%;
+}
+* {
+  font-family: "Vazirmatn", sans-serif !important;
+  font-weight: 300;
 }
