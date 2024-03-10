@@ -13,12 +13,21 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './auth/home/home.component';
 import { TrainingComponent } from './training/training.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgModel } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+import {
+  MaterialPersianDateAdapter,
+  PERSIAN_DATE_FORMATS,
+} from './persian-date-adapter';
 
 @NgModule({
   declarations: [
@@ -39,7 +48,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BrowserAnimationsModule,
     MatCheckboxModule,
   ],
-  providers: [provideClientHydration(), provideAnimationsAsync()],
+  providers: [
+    provideClientHydration(),
+    provideAnimationsAsync(),
+    {
+      provide: DateAdapter,
+      useClass: MaterialPersianDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

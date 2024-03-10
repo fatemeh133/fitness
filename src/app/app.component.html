@@ -1,1 +1,21 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation"
+    >Sidenav content
+    <p>side nav</p></mat-sidenav
+  >
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon fontIcon="menue"></mat-icon>
+      </button>
+      <div>لوگو</div>
+      <ul fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="15px">
+        <li><a routerLink="/">خانه </a></li>
+        <li><a routerLink="/signup">ثبت نام</a></li>
+        <li><a routerLink="/login">ورود </a></li>
+      </ul>
+      <div></div>
+    </mat-toolbar>
+    <main><router-outlet></router-outlet></main
+  ></mat-sidenav-content>
+</mat-sidenav-container>

@@ -6,15 +6,15 @@
     (ngSubmit)="onSubmit(f)"
   >
     <mat-form-field>
-      <mat-label>email</mat-label>
+      <mat-label>ایمیل</mat-label>
       <input matInput ngModel name="email" email required #email="ngModel" />
-      <mat-error *ngIf="!email.hasError('required')">invalid email</mat-error>
+      <mat-error *ngIf="!email.hasError('required')">ایمیل نامعتبر</mat-error>
       <mat-error *ngIf="email.hasError('required')"
-        >field must not be empty</mat-error
+        >ایمیل نباید خالی باشد</mat-error
       >
     </mat-form-field>
     <mat-form-field>
-      <mat-label>password</mat-label>
+      <mat-label>پسورد</mat-label>
       <input
         matInput
         ngModel
@@ -24,11 +24,11 @@
         minlength="6"
         #password="ngModel"
       />
-      <mat-hint align="end">{{ password.value.length }} / 6</mat-hint>
-      <mat-hint>6 char at least</mat-hint>
+      <mat-hint align="end">6 / {{ password.value.length }}</mat-hint>
+      <mat-hint>حداقل کاراکتر مجاز ۶ کاراکتر</mat-hint>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Birthday</mat-label>
+      <mat-label>تاریخ تولد</mat-label>
       <input
         matInput
         [matDatepicker]="picker"
@@ -36,20 +36,15 @@
         name="birthday"
         required
       />
-      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-hint>روز/ماه/سال</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-checkbox
-      ngModel
-      name="agree"
-      color="primary"
-      fxLayoutAlign="start"
-      required
-      >Agree Terms and conditions</mat-checkbox
+    <mat-checkbox ngModel name="agree" color="primary" required
+      >توافق با قوانین و مقررات</mat-checkbox
     >
     <button
       type="submit"
@@ -57,7 +52,7 @@
       color="primary"
       [disabled]="f.invalid"
     >
-      Submit
+      ثبت
     </button>
   </form>
 </section>
