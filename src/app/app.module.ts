@@ -29,6 +29,7 @@ import {
   PERSIAN_DATE_FORMATS,
 } from './persian-date-adapter';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { HeaderComponent } from './navigation/header/header.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     HomeComponent,
     TrainingComponent,
     SidenavListComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

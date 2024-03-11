@@ -1,39 +1,10 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
-    <mat-list role="list">
-      <mat-list-item role="listitem" routerLink="/" (click)="sidenav.close()"
-        >خانه
-      </mat-list-item>
-      <mat-list-item
-        role="listitem"
-        routerLink="/signup"
-        (click)="sidenav.close()"
-        >ثبت نام</mat-list-item
-      >
-      <mat-list-item
-        role="listitem"
-        routerLink="/login"
-        (click)="sidenav.close()"
-        >ورود
-      </mat-list-item>
-    </mat-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()" fxHide.gt-xs>
-        <mat-icon fontIcon="menu">menu</mat-icon>
-      </button>
+    <app-sidenav-list (sidenavEmitter)="sidenav.close()"></app-sidenav-list
+  ></mat-sidenav>
 
-      <div>لوگو</div>
-      <ul fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="15px" fxHide.xs>
-        <li>
-          <a routerLink="/"> خانه </a>
-        </li>
-        <li><a routerLink="/signup">ثبت نام</a></li>
-        <li><a routerLink="/login">ورود </a></li>
-      </ul>
-      <div></div>
-    </mat-toolbar>
+  <mat-sidenav-content>
+    <app-header (headerEmitter)="sidenav.toggle()"></app-header>
     <main><router-outlet></router-outlet></main
   ></mat-sidenav-content>
 </mat-sidenav-container>

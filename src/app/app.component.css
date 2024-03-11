@@ -7,20 +7,6 @@ mat-sidenav {
   width: 250px;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-a:hover {
-  color: #c7cbe4;
-}
-a:active {
-  color: #a9aece;
-}
-ul {
-  list-style: none;
-  margin-left: 60px;
-}
 main {
   padding-top: 20px;
 }

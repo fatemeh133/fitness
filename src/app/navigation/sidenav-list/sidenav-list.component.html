@@ -1,1 +1,17 @@
-<p>sidenav-list works!</p>
+<mat-list role="list">
+  <mat-list-item role="listitem" routerLink="/" (click)="sidenavbartoggle()"
+    >خانه
+  </mat-list-item>
+  <mat-list-item
+    role="listitem"
+    routerLink="/signup"
+    (click)="sidenavbartoggle()"
+    >ثبت نام</mat-list-item
+  >
+  <mat-list-item
+    role="listitem"
+    routerLink="/login"
+    (click)="sidenavbartoggle()"
+    >ورود
+  </mat-list-item>
+</mat-list>
