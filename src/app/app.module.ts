@@ -33,6 +33,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { NewTrainingComponent } from './new-training/new-training.component';
 import { PastTrainingComponent } from './past-training/past-training.component';
 import { CurrentTrainingComponent } from './current-training/current-training.component';
+import { DialogComponent } from './current-training/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CurrentTrainingComponent } from './current-training/current-training.co
     NewTrainingComponent,
     PastTrainingComponent,
     CurrentTrainingComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
