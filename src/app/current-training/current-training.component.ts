@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 
@@ -10,9 +10,13 @@ import { DialogComponent } from './dialog/dialog.component';
 export class CurrentTrainingComponent implements OnInit {
   progress = 0;
   interval: any;
+  @Output() popupEvent = new EventEmitter();
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
+    this.startOrResume();
+  }
+  startOrResume() {
     this.interval = setInterval(() => {
       this.progress += 10;
       if (this.progress >= 100) {
@@ -20,8 +24,18 @@ export class CurrentTrainingComponent implements OnInit {
       }
     }, 1000);
   }
+
   stop() {
     clearInterval(this.interval);
-    this.dialog.open(DialogComponent, { data: { progress: this.progress } });
+    let openDialog = this.dialog.open(DialogComponent, {
+      data: { progress: this.progress },
+    });
+    openDialog.afterClosed().subscribe((result) => {
+      if (result == 'true') {
+        this.popupEvent.emit();
+      } else {
+        this.startOrResume();
+      }
+    });
   }
 }

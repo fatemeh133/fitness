@@ -4,4 +4,7 @@
   </mat-tab>
   <mat-tab label="تمرین قبلی"><app-past-training></app-past-training> </mat-tab>
 </mat-tab-group>
-<app-current-training *ngIf="isTrainStart"></app-current-training>
+<app-current-training
+  *ngIf="isTrainStart"
+  (popupEvent)="isTrainStart = false"
+></app-current-training>
