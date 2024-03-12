@@ -22,6 +22,6 @@ export class CurrentTrainingComponent implements OnInit {
   }
   stop() {
     clearInterval(this.interval);
-    this.dialog.open(DialogComponent);
+    this.dialog.open(DialogComponent, { data: { progress: this.progress } });
   }
 }
