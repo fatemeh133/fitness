@@ -1,12 +1,34 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
+  isAuth!: boolean;
+  subscription: Subscription | undefined;
+
+  constructor(private authService: AuthService) {}
   @Output() headerEmitter = new EventEmitter<void>();
+
+  ngOnInit() {
+    this.subscription = this.authService.authChange.subscribe((result) => {
+      console.log(result);
+      this.isAuth = result;
+    });
+  }
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+  }
 
   toolbartoggle() {
     this.headerEmitter.emit();

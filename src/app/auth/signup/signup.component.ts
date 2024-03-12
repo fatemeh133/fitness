@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +8,13 @@ import { NgForm } from '@angular/forms';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  onSubmit(f: NgForm) {
-    console.log(f);
+  constructor(private authService: AuthService) {}
+  onSubmit(form: NgForm) {
+    console.log(form);
+
+    this.authService.register({
+      email: form.value.email,
+      password: form.value.password,
+    });
   }
 }

@@ -1,5 +1,10 @@
 <section>
-  <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm">
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
     <mat-form-field>
       <mat-label>ایمیل</mat-label>
       <input matInput ngModel name="email" email required #email="ngModel" />

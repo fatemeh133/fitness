@@ -8,8 +8,10 @@
     <li>
       <a routerLink="/"> خانه </a>
     </li>
-    <li><a routerLink="/signup">ثبت نام</a></li>
-    <li><a routerLink="/login">ورود </a></li>
+    <li *ngIf="!isAuth"><a routerLink="/signup">ثبت نام</a></li>
+    <li *ngIf="!isAuth"><a routerLink="/login">ورود </a></li>
+    <li *ngIf="isAuth"><a routerLink="/training">تمرین </a></li>
+    <li *ngIf="isAuth"><a routerLink="/">خروج </a></li>
   </ul>
   <div></div>
 </mat-toolbar>
