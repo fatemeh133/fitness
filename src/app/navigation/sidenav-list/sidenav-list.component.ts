@@ -33,7 +33,9 @@ export class SidenavListComponent implements OnInit, OnDestroy {
   sidenavbartoggle() {
     this.sidenavEmitter.emit();
   }
-  exit() {
+  onLogout() {
     this.isAuth = false;
+    this.authService.logout();
+    this.sidenavbartoggle();
   }
 }

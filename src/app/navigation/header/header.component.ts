@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toolbartoggle() {
     this.headerEmitter.emit();
   }
-  exit() {
+  onLogout() {
     this.isAuth = false;
+    this.authService.logout();
   }
 }
