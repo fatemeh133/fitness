@@ -16,9 +16,9 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuth!: boolean;
   subscription: Subscription | undefined;
+  @Output() headerEmitter = new EventEmitter<void>();
 
   constructor(private authService: AuthService) {}
-  @Output() headerEmitter = new EventEmitter<void>();
 
   ngOnInit() {
     this.subscription = this.authService.authChange.subscribe((result) => {
@@ -32,5 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toolbartoggle() {
     this.headerEmitter.emit();
+  }
+  exit() {
+    this.isAuth = false;
   }
 }

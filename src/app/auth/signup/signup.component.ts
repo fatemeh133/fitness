@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent {
   constructor(private authService: AuthService) {}
+
   onSubmit(form: NgForm) {
     console.log(form);
 
