@@ -7,6 +7,9 @@ import { TrainingService } from './training.service';
   styleUrl: './training.component.css',
 })
 export class TrainingComponent implements OnInit {
+  getRunningExercise() {
+    throw new Error('Method not implemented.');
+  }
   isTrainStart: boolean = false;
   constructor(private trainingService: TrainingService) {}
 
@@ -15,13 +18,16 @@ export class TrainingComponent implements OnInit {
 
     this.trainingService.exerciseDataTransference.subscribe((selectedExcer) => {
       console.log('subscribeed');
-      if (selectedExcer) {
+
+      if (selectedExcer !== null) {
         console.log(
           'exercise is selected so it can show current training component'
         );
+
         this.isTrainStart = true;
       } else {
         this.isTrainStart = false;
+
         console.log(
           'exercise is not selected yet, its showing new-training component'
         );

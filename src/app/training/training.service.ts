@@ -14,6 +14,7 @@ export class TrainingService {
   ];
   private exercise: Exercise;
   exerciseDataTransference = new Subject<Exercise>();
+  private exercises: Exercise[] = [];
 
   constructor() {}
 
@@ -28,5 +29,33 @@ export class TrainingService {
     console.log('selected Exercise', { ...this.exercise });
     this.exerciseDataTransference.next({ ...this.exercise });
     console.log('selected Exercise has been snet to training component.ts');
+  }
+
+  getRunningExercise(): any {
+    return { ...this.exercise };
+  }
+
+  compeleteExercise() {
+    this.exercises.push({
+      ...this.exercise,
+      date: new Date(),
+      state: 'completed',
+    });
+    this.exercise = null;
+    this.exerciseDataTransference.next(null);
+    console.log(this.exercises);
+  }
+
+  cancelExercise(progress: number) {
+    this.exercises.push({
+      ...this.exercise,
+      date: new Date(),
+      state: 'canceled',
+      duration: this.exercise.duration * (progress / 100),
+      calories: this.exercise.calories * (progress / 100),
+    });
+    this.exercise = null;
+    this.exerciseDataTransference.next(null);
+    console.log(this.exercises);
   }
 }
