@@ -14,7 +14,7 @@ export class TrainingService {
   ];
   private exercise: Exercise;
   exerciseDataTransference = new Subject<Exercise>();
-  private exercises: Exercise[] = [];
+  private selectedExercises: Exercise[] = [];
 
   constructor() {}
 
@@ -36,18 +36,18 @@ export class TrainingService {
   }
 
   compeleteExercise() {
-    this.exercises.push({
+    this.selectedExercises.push({
       ...this.exercise,
       date: new Date(),
       state: 'completed',
     });
     this.exercise = null;
     this.exerciseDataTransference.next(null);
-    console.log(this.exercises);
+    console.log('completed: ', this.selectedExercises);
   }
 
   cancelExercise(progress: number) {
-    this.exercises.push({
+    this.selectedExercises.push({
       ...this.exercise,
       date: new Date(),
       state: 'canceled',
@@ -56,6 +56,10 @@ export class TrainingService {
     });
     this.exercise = null;
     this.exerciseDataTransference.next(null);
-    console.log(this.exercises);
+    console.log('canceled: ', this.selectedExercises);
+  }
+
+  getCompeletedExercise() {
+    return [...this.selectedExercises];
   }
 }
