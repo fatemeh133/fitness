@@ -34,6 +34,8 @@ import { NewTrainingComponent } from './new-training/new-training.component';
 import { PastTrainingComponent } from './past-training/past-training.component';
 import { CurrentTrainingComponent } from './current-training/current-training.component';
 import { DialogComponent } from './current-training/dialog/dialog.component';
+import { TranslationPipe } from './translation.pipe';
+import { PersianDatePipe } from './persian-date.pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { DialogComponent } from './current-training/dialog/dialog.component';
     PastTrainingComponent,
     CurrentTrainingComponent,
     DialogComponent,
+    TranslationPipe,
+    PersianDatePipe,
   ],
   imports: [
     BrowserModule,
