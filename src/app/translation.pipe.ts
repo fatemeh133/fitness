@@ -8,7 +8,7 @@ export class TranslationPipe implements PipeTransform {
     switch (value) {
       case 'canceled':
         return 'لغو شده';
-      case 'complted':
+      case 'completed':
         return 'تکمیل شده';
 
       default:

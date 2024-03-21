@@ -14,7 +14,48 @@ export class TrainingService {
   ];
   private exercise: Exercise;
   exerciseDataTransference = new Subject<Exercise>();
-  private selectedExercises: Exercise[] = [];
+  private selectedExercises: Exercise[] = [
+    {
+      id: 's',
+      name: 'string',
+      duration: 2,
+      calories: 3,
+      date: new Date(),
+      state: 'completed',
+    },
+    {
+      id: 's',
+      name: 'strinnng',
+      duration: 2,
+      calories: 3,
+      date: new Date(),
+      state: 'completed',
+    },
+    {
+      id: 'syy',
+      name: 'stringgg',
+      duration: 2,
+      calories: 3,
+      date: new Date(),
+      state: 'completed',
+    },
+    {
+      id: 'sfgh',
+      name: 'sssstring',
+      duration: 2,
+      calories: 3,
+      date: new Date(),
+      state: 'completed',
+    },
+    {
+      id: 'ssss',
+      name: 'striiiing',
+      duration: 2,
+      calories: 3,
+      date: new Date(),
+      state: 'completed',
+    },
+  ];
 
   constructor() {}
 
