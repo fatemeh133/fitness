@@ -18,7 +18,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -36,6 +35,8 @@ import { CurrentTrainingComponent } from './current-training/current-training.co
 import { DialogComponent } from './current-training/dialog/dialog.component';
 import { TranslationPipe } from './translation.pipe';
 import { PersianDatePipe } from './persian-date.pipe';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PersianPaginatior } from './translate-Pagination';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { PersianDatePipe } from './persian-date.pipe';
     MatCheckboxModule,
   ],
   providers: [
+    { provide: MatPaginatorIntl, useClass: PersianPaginatior },
     provideClientHydration(),
     provideAnimationsAsync(),
     {

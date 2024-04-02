@@ -6,7 +6,6 @@ import moment from 'jalali-moment';
 })
 export class PersianDatePipe implements PipeTransform {
   transform(value: Date): string {
-    const PersianDate = moment(value).locale('fa').format('YYYY/MM/DD');
-    return PersianDate;
+    return moment(value).locale('fa').format('YYYY/MM/DD');
   }
 }
