@@ -1,9 +1,15 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { TrainingService } from '../training/training.service';
 import { Exercise } from '../training/exercise.model';
 import { NgForm } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { log } from 'console';
 
 @Component({
@@ -11,9 +17,10 @@ import { log } from 'console';
   templateUrl: './new-training.component.html',
   styleUrl: './new-training.component.css',
 })
-export class NewTrainingComponent implements OnInit {
+export class NewTrainingComponent implements OnInit, OnDestroy {
   @Output() startTrain = new EventEmitter<void>();
-  exercises: Observable<Exercise[]>;
+  exercises: Exercise[];
+  exercisesSubscription: Subscription;
 
   constructor(
     private training: TrainingService,
@@ -21,32 +28,26 @@ export class NewTrainingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.exercises = this.training.getAvailableExercises();
-    // this.exercises = this.db.collection('exercises').valueChanges();
     console.log('db firebaseeeeeeee');
+    this.exercisesSubscription = this.training.exercisesChanged.subscribe(
+      (exer) => {
+        this.exercises = exer;
+      }
+    );
+    this.training.fetchAvailableExercises();
 
-    // this.db
-    //   .collection('exercises')
-    //   .valueChanges()
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //   });
-    this.exercises = this.db
-      .collection('exercises')
-      .snapshotChanges()
-      .pipe(
-        map((docArray) => {
-          return docArray.map((doc) => {
-            return {
-              id: doc.payload.doc.id,
-              name: (doc.payload.doc.data() as any).name,
-              duration: (doc.payload.doc.data() as any).duration,
-              calories: (doc.payload.doc.data() as any).calories,
-            };
-          });
+    console.log(
+      this.db
+        .collection('exercises')
+        .valueChanges()
+        .subscribe((changes) => {
+          console.log(changes);
         })
-      );
-    console.log();
+    );
+  }
+
+  ngOnDestroy() {
+    this.exercisesSubscription.unsubscribe();
   }
 
   starttrain(form: NgForm) {

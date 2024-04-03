@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Exercise } from './exercise.model';
-import { Subject } from 'rxjs';
+import { Subject, map } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrainingService {
-  private availableExercises: Exercise[] = [
-    { id: 'crunches', name: 'کرانچ', duration: 30, calories: 8 },
-    { id: 'squat', name: 'اسکوات', duration: 180, calories: 15 },
-    { id: 'side-lunges', name: 'لانچ اسکوات', duration: 120, calories: 18 },
-    { id: 'burpees', name: 'شنا', duration: 60, calories: 8 },
-  ];
+  private availableExercises: Exercise[] = [];
   private exercise: Exercise;
-  exerciseDataTransference = new Subject<Exercise>();
+  exerciseChanged = new Subject<Exercise>();
+  exercisesChanged = new Subject<Exercise[]>();
   private selectedExercises: Exercise[] = [
     {
       id: 's',
@@ -57,10 +54,28 @@ export class TrainingService {
     },
   ];
 
-  constructor() {}
+  constructor(private db: AngularFirestore) {}
 
-  getAvailableExercises() {
-    return this.availableExercises.slice();
+  fetchAvailableExercises() {
+    this.db
+      .collection('exercises')
+      .snapshotChanges()
+      .pipe(
+        map((docArray) => {
+          return docArray.map((doc) => {
+            return {
+              id: doc.payload.doc.id,
+              name: (doc.payload.doc.data() as any).name,
+              duration: (doc.payload.doc.data() as any).duration,
+              calories: (doc.payload.doc.data() as any).calories,
+            };
+          });
+        })
+      )
+      .subscribe((exer: Exercise[]) => {
+        this.availableExercises = exer;
+        this.exercisesChanged.next([...this.availableExercises]);
+      });
   }
 
   startExercise(selectedId: string) {
@@ -68,7 +83,7 @@ export class TrainingService {
 
     this.exercise = this.availableExercises.find((ex) => selectedId === ex.id)!;
     console.log('selected Exercise', { ...this.exercise });
-    this.exerciseDataTransference.next({ ...this.exercise });
+    this.exerciseChanged.next({ ...this.exercise });
     console.log('selected Exercise has been snet to training component.ts');
   }
 
@@ -83,7 +98,7 @@ export class TrainingService {
       state: 'completed',
     });
     this.exercise = null;
-    this.exerciseDataTransference.next(null);
+    this.exerciseChanged.next(null);
     console.log('completed: ', this.selectedExercises);
   }
 
@@ -96,7 +111,7 @@ export class TrainingService {
       calories: this.exercise.calories * (progress / 100),
     });
     this.exercise = null;
-    this.exerciseDataTransference.next(null);
+    this.exerciseChanged.next(null);
     console.log('canceled: ', this.selectedExercises);
   }
 
