@@ -11,6 +11,7 @@ export class TrainingService {
   private exercise: Exercise;
   exerciseChanged = new Subject<Exercise>();
   exercisesChanged = new Subject<Exercise[]>();
+  finishedExChanged = new Subject<Exercise[]>();
   private selectedExercises: Exercise[] = [
     {
       id: 's',
@@ -115,8 +116,14 @@ export class TrainingService {
     console.log('canceled: ', this.selectedExercises);
   }
 
-  getCompeletedExercise() {
-    return [...this.selectedExercises];
+  fetchCompeletedExercise() {
+    this.db
+      .collection('finishedExercises')
+      .valueChanges()
+      .subscribe((exer: Exercise[]) => {
+        console.log(exer);
+        this.finishedExChanged.next([...exer]);
+      });
   }
 
   private addDataToDatabase(finishedExercise: Exercise) {
