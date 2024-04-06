@@ -39,6 +39,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PersianPaginatior } from './translate-Pagination';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environment/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { environment } from '../environment/environment';
     MatNativeDateModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [

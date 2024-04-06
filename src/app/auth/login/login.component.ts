@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   constructor(private authService: AuthService) {}
   onSubmit(form: NgForm) {
-    this.authService.register({
+    this.authService.login({
       email: form.value.email,
       password: form.value.password,
     });
