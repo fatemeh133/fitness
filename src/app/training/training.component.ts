@@ -16,7 +16,7 @@ export class TrainingComponent implements OnInit {
   ngOnInit() {
     console.log('initialized');
 
-    this.trainingService.exerciseDataTransference.subscribe((selectedExcer) => {
+    this.trainingService.exerciseChanged.subscribe((selectedExcer) => {
       console.log('subscribeed');
 
       if (selectedExcer !== null) {
