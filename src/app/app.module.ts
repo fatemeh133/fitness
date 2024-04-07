@@ -40,6 +40,9 @@ import { PersianPaginatior } from './translate-Pagination';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environment/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AuthService } from './auth/auth.service';
+import { TrainingService } from './training/training.service';
+import { UiService } from './shared/ui.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
+    AuthService,
+    TrainingService,
+    UiService,
   ],
   bootstrap: [AppComponent],
 })

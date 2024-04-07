@@ -1,3 +1,4 @@
+import { UiService } from './../shared/ui.service';
 import { Injectable } from '@angular/core';
 import { AuthData } from './auth.model';
 import { User } from './user.model';
@@ -16,7 +17,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private fireAth: AngularFireAuth,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private uiService: UiService
   ) {}
 
   register(auth: AuthData) {
@@ -36,9 +38,11 @@ export class AuthService {
   }
 
   login(auth: AuthData) {
+    this.uiService.loadingState.next(true);
     this.fireAth
       .signInWithEmailAndPassword(auth.email, auth.password)
       .then((userCredential) => {
+        this.uiService.loadingState.next(false);
         // User successfully logged in
         console.log('User logged in:', userCredential.user);
 
@@ -49,6 +53,7 @@ export class AuthService {
         this.authAndRouting(true, '/training');
       })
       .catch((error) => {
+        this.uiService.loadingState.next(false);
         this.snackbar.open(error.message, null, { duration: 4000 });
       });
   }

@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { UiService } from '../../shared/ui.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
-  constructor(private authService: AuthService) {}
+export class LoginComponent implements OnInit {
+  isloading: boolean = false;
+
+  constructor(private authService: AuthService, private uiService: UiService) {}
+
+  ngOnInit() {
+    this.uiService.loadingState.subscribe((isloading) => {
+      this.isloading = isloading;
+    });
+  }
   onSubmit(form: NgForm) {
     this.authService.login({
       email: form.value.email,
